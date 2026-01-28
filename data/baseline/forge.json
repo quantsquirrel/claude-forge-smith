@@ -1,0 +1,35 @@
+{
+  "skill_name": "skill-forge:forge",
+  "version": "v0.6",
+  "scores": [64, 69, 80],
+  "mean": 71.00,
+  "stddev": 8.19,
+  "ci": [50.66, 91.34],
+  "timestamp": "2026-01-29T06:15:00Z",
+  "evaluations": [
+    {
+      "id": 1,
+      "score": 64,
+      "notes": [
+        "Quick Reference(7단계)와 Workflow(11단계) 불일치",
+        "Description이 'Use when...' 패턴 미준수"
+      ]
+    },
+    {
+      "id": 2,
+      "score": 69,
+      "notes": [
+        "외부 의존성 오류 처리 부재",
+        "전제 조건(prerequisites) 섹션 누락"
+      ]
+    },
+    {
+      "id": 3,
+      "score": 80,
+      "notes": [
+        "입력 파라미터 명시적 정의 섹션 부재",
+        "When to Use 섹션 부재"
+      ]
+    }
+  ]
+}

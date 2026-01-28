@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKILL-UP :: 스탯창</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+KR:wght@400;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-dark: #1a1a2e;
+  --bg-parchment: #2a2a1e;
+  --text-primary: #e8d5b7;
+  --text-secondary: #a89070;
+  --border-parchment: #5a4a30;
+  --grade-sss: linear-gradient(135deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #8b00ff);
+  --grade-ss: #ffd700;
+  --grade-s: #9b59b6;
+  --grade-a: #3498db;
+  --grade-b: #2ecc71;
+  --grade-c: #ecf0f1;
+  --grade-d: #95a5a6;
+  --grade-f: #4a4a4a;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: 'Noto Sans KR', sans-serif;
+  min-height: 100dvh;
+  padding: 24px;
+  background-image:
+    radial-gradient(ellipse at top, rgba(42, 42, 30, 0.8) 0%, transparent 70%),
+    repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(90, 74, 48, 0.05) 50px, rgba(90, 74, 48, 0.05) 51px);
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  padding: 24px 0;
+  border-bottom: 2px solid var(--border-parchment);
+  margin-bottom: 28px;
+}
+
+.header h1 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  color: var(--text-primary);
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+  text-wrap: balance;
+}
+
+.header h1 .subtitle {
+  display: block;
+  font-size: 10px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+.profile-section {
+  display: flex;
+  gap: 32px;
+  padding: 28px;
+  background: rgba(42, 42, 30, 0.7);
+  border: 1px solid var(--border-parchment);
+  border-radius: 8px;
+  margin-bottom: 32px;
+}
+
+.profile-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: 160px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  image-rendering: pixelated;
+  background: var(--bg-dark);
+  border: 2px solid var(--border-parchment);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-canvas {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.username {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--text-primary);
+}
+
+.level {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--grade-ss);
+}
+
+.job-name {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+  font-weight: 700;
+}
+
+.profile-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bar-label {
+  width: 64px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.bar-track {
+  flex: 1;
+  height: 18px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--border-parchment);
+}
+
+.bar-fill {
+  height: 100%;
+  background: #6a5acd;
+  border-radius: 1px;
+}
+
+.bar-count {
+  width: 24px;
+  color: var(--text-primary);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+}
+
+.inventory-section { padding: 0; }
+
+.category-group { margin-bottom: 32px; }
+
+.category-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border-parchment);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-title::before {
+  content: '>';
+  color: var(--grade-ss);
+}
+
+.skill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.skill-card {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 10px 10px;
+  background: rgba(26, 26, 46, 0.8);
+  border: 2px solid var(--grade-f);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 150ms ease-out, background 150ms ease-out, border-color 150ms ease-out;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  background: rgba(42, 42, 60, 0.95);
+  z-index: 10;
+}
+
+.skill-card:hover .skill-name {
+  color: #fff;
+}
+
+.skill-card[data-grade="SSS"] {
+  border-image: var(--grade-sss) 1;
+  animation: sss-glow 2s ease-in-out infinite;
+}
+.skill-card[data-grade="SS"] { border-color: var(--grade-ss); }
+.skill-card[data-grade="S"] { border-color: var(--grade-s); }
+.skill-card[data-grade="A"] { border-color: var(--grade-a); }
+.skill-card[data-grade="B"] { border-color: var(--grade-b); }
+.skill-card[data-grade="C"] { border-color: var(--grade-c); }
+.skill-card[data-grade="D"] { border-color: var(--grade-d); }
+.skill-card[data-grade="F"] { border-color: var(--grade-f); opacity: 0.7; }
+
+@keyframes sss-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.4), 0 0 20px rgba(255, 119, 0, 0.2); }
+  25% { box-shadow: 0 0 10px rgba(255, 255, 0, 0.4), 0 0 20px rgba(0, 255, 0, 0.2); }
+  50% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.4), 0 0 20px rgba(0, 0, 255, 0.2); }
+  75% { box-shadow: 0 0 10px rgba(0, 0, 255, 0.4), 0 0 20px rgba(139, 0, 255, 0.2); }
+}
+
+.skill-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-icon canvas {
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+}
+
+.skill-name {
+  font-size: 12px;
+  text-align: center;
+  color: var(--text-primary);
+  line-height: 1.3;
+  max-width: 120px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  transition: color 150ms ease-out;
+}
+
+.skill-grade-badge {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  background: rgba(0,0,0,0.4);
+}
+
+.skill-card[data-grade="SSS"] .skill-grade-badge { color: #ff6b6b; text-shadow: 0 0 4px rgba(255,107,107,0.5); }
+.skill-card[data-grade="SS"] .skill-grade-badge { color: var(--grade-ss); text-shadow: 0 0 4px rgba(255,215,0,0.4); }
+.skill-card[data-grade="S"] .skill-grade-badge { color: var(--grade-s); }
+.skill-card[data-grade="A"] .skill-grade-badge { color: var(--grade-a); }
+.skill-card[data-grade="B"] .skill-grade-badge { color: var(--grade-b); }
+.skill-card[data-grade="C"] .skill-grade-badge { color: var(--grade-c); }
+.skill-card[data-grade="D"] .skill-grade-badge { color: var(--grade-d); }
+.skill-card[data-grade="F"] .skill-grade-badge { color: var(--grade-f); }
+
+.tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  padding: 20px;
+  padding-bottom: 28px;
+  background: rgba(20, 20, 35, 0.97);
+  border: 1px solid var(--border-parchment);
+  border-radius: 6px;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.skill-card:hover .tooltip { display: block; }
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-parchment);
+}
+
+.tooltip-header .skill-icon { width: 28px; height: 28px; }
+.tooltip-header .skill-icon canvas { width: 24px; height: 24px; }
+
+.tooltip-name { font-size: 14px; font-weight: 700; flex: 1; }
+
+.tooltip-grade {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+}
+
+.tooltip-category {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.tooltip-trigger {
+  font-size: 13px;
+  color: var(--grade-ss);
+  margin-bottom: 10px;
+}
+
+.tooltip-desc {
+  font-size: 13px;
+  color: var(--text-primary);
+  font-style: italic;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+  border-left: 2px solid var(--grade-s);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.tooltip-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.tooltip-stat {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+}
+
+.tooltip-stat-value { color: var(--text-primary); }
+.tooltip-stat-value.covered { color: var(--grade-b); }
+.tooltip-stat-value.not-covered { color: #e74c3c; }
+
+.tooltip-scope {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-parchment);
+  display: flex;
+  gap: 6px;
+}
+
+.scope-badge {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: rgba(106, 90, 205, 0.3);
+  color: var(--text-primary);
+  border: 1px solid rgba(106, 90, 205, 0.5);
+}
+
+.scope-badge.inactive {
+  opacity: 0.3;
+  background: transparent;
+  border-color: var(--border-parchment);
+}
+
+.tooltip-actions {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-parchment);
+  display: flex;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+.action-btn {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 3px;
+  border: 1px solid var(--border-parchment);
+  background: rgba(0,0,0,0.3);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.action-btn:hover { background: rgba(106, 90, 205, 0.3); }
+.action-btn.upgrade { border-color: var(--grade-ss); color: var(--grade-ss); }
+.action-btn.upgrade:hover { background: rgba(255, 215, 0, 0.15); }
+.action-btn.upgrade.done { opacity: 0.5; cursor: default; border-color: var(--border-parchment); color: var(--text-secondary); }
+.action-btn.upgrade.done:hover { background: rgba(0,0,0,0.3); }
+.action-btn.danger { border-color: #e74c3c; color: #e74c3c; }
+.action-btn.danger:hover { background: rgba(231, 76, 60, 0.2); }
+
+.upgraded-badge {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 12px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(20, 20, 35, 0.95);
+  border: 1px solid var(--grade-ss);
+  color: var(--text-primary);
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  opacity: 0;
+  transition: transform 150ms ease-out, opacity 150ms ease-out;
+  z-index: 2000;
+}
+
+.toast.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: #1e1e2e;
+  border: 1px solid var(--border-parchment);
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  margin-bottom: 16px;
+  color: #e74c3c;
+}
+
+.modal p {
+  font-size: 13px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  text-wrap: pretty;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.modal-btn {
+  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border-parchment);
+  background: rgba(0,0,0,0.3);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.modal-btn.confirm {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.modal-btn:hover { opacity: 0.8; }
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-card { transition: none; }
+  .skill-card[data-grade="SSS"] { animation: none; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="header">
+    <h1>SKILL-UP :: 스탯창<span class="subtitle">Agent Skill Inventory</span></h1>
+  </header>
+
+  <section class="profile-section" id="profile"></section>
+  <section class="inventory-section" id="inventory"></section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal" role="alertdialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+    <h3 id="modalTitle">스킬 삭제</h3>
+    <p id="modalDesc"></p>
+    <div class="modal-actions">
+      <button class="modal-btn" id="modalCancel">취소</button>
+      <button class="modal-btn confirm" id="modalConfirm">삭제</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = __SKILL_UP_DATA__;
+
+const ICON_PIXELS = {
+  'code-review': [
+    '...x.x...',
+    '..x.x.x..',
+    '.x..x..x.',
+    'x...x...x',
+    '.x..x..x.',
+    '..x.x.x..',
+    '...x.x...',
+    '....x....',
+    '...x.x...',
+  ],
+  'debugging': [
+    '..xxxxx..',
+    '.x..x..x.',
+    'x...x...x',
+    'xx..x..xx',
+    'x...x...x',
+    'xx..x..xx',
+    'x...x...x',
+    '.x..x..x.',
+    '..xxxxx..',
+  ],
+  'refactoring': [
+    'x.......x',
+    'xx.....x.',
+    'x.x...x..',
+    'x..x.x...',
+    'x...x....',
+    'x..x.x...',
+    'x.x...x..',
+    'xx.....x.',
+    'x.......x',
+  ],
+  'testing': [
+    '.xxxxxxx.',
+    '.x.....x.',
+    '..x...x..',
+    '..x...x..',
+    '..x...x..',
+    '.x.....x.',
+    '.x.....x.',
+    '.x.....x.',
+    '.xxxxxxx.',
+  ],
+  'git-workflow': [
+    '....x....',
+    '...xxx...',
+    '....x....',
+    '....x....',
+    '...x.x...',
+    '..x...x..',
+    '.x.....x.',
+    'x.......x',
+    '.........',
+  ],
+  'api-design': [
+    '.xxxxxxx.',
+    'x.......x',
+    'x..xxx..x',
+    'x..x.x..x',
+    'x..xxx..x',
+    'x.......x',
+    'x.......x',
+    'x.......x',
+    '.xxxxxxx.',
+  ],
+  'documentation': [
+    '.xxxxxx..',
+    '.x....xx.',
+    '.x.....x.',
+    '.x..xx.x.',
+    '.x.....x.',
+    '.x..xx.x.',
+    '.x.....x.',
+    '.x.....x.',
+    '.xxxxxxx.',
+  ],
+  'architecture': [
+    '....x....',
+    '...x.x...',
+    '..x...x..',
+    '.x.....x.',
+    'xxxxxxxxx',
+    '..x...x..',
+    '..x...x..',
+    '..x...x..',
+    '..x...x..',
+  ],
+  'performance': [
+    '.....x...',
+    '....xx...',
+    '...xxx...',
+    '..xxxx...',
+    '.xxxxx...',
+    '..xxxx...',
+    '...xxx...',
+    '....xx...',
+    '.....x...',
+  ],
+  'data-analysis': [
+    'x........',
+    'x...xx...',
+    'x...xx...',
+    'x..xxxx..',
+    'x..xxxx..',
+    'x.xxxxxx.',
+    'x.xxxxxx.',
+    'xxxxxxxxx',
+    'xxxxxxxxx',
+  ],
+  'writing': [
+    '.......xx',
+    '......xx.',
+    '.....xx..',
+    '....xx...',
+    '...xx....',
+    '..xx.....',
+    '.xx......',
+    'xx.......',
+    'xxxxxxxxx',
+  ],
+  'presentation': [
+    'xxxxxxxxx',
+    'x.......x',
+    'x..xxx..x',
+    'x.......x',
+    'xxxxxxxxx',
+    '...xxx...',
+    '....x....',
+    '....x....',
+    '...xxx...',
+  ],
+  'research': [
+    '..xxxx...',
+    '.x....x..',
+    'x......x.',
+    'x......x.',
+    '.x....x..',
+    '..xxxx...',
+    '....x.x..',
+    '.....x.x.',
+    '......x..',
+  ],
+  'project-mgmt': [
+    'xx.......',
+    'xx..xxxx.',
+    '.........',
+    'xx.......',
+    'xx.xxxxxx',
+    '.........',
+    'xx.......',
+    'xx..xxx..',
+    '.........',
+  ],
+  'communication': [
+    '.xxxxxxx.',
+    'x.......x',
+    'x..xxx..x',
+    'x.......x',
+    'x.......x',
+    '.xxxxxxx.',
+    '...x.....',
+    '..x......',
+    '.........',
+  ],
+  'automation': [
+    '..xxxxx..',
+    '.xx...xx.',
+    'xx.....xx',
+    'x...x...x',
+    'xx.....xx',
+    '.xx...xx.',
+    '..xxxxx..',
+    '...xxx...',
+    '....x....',
+  ],
+  'design': [
+    '..xxxxx..',
+    '.x.....x.',
+    'x..x.x..x',
+    'x...x...x',
+    'x.......x',
+    'x.......x',
+    '.x.....x.',
+    '..xxxxx..',
+    '.........',
+  ],
+  'problem-solving': [
+    '.xxxxxxx.',
+    'x.......x',
+    'x.....x.x',
+    '....xx...',
+    '...x.....',
+    '...x.....',
+    '.........',
+    '...x.....',
+    '.........',
+  ],
+  'learning': [
+    '....x....',
+    '...xxx...',
+    '..xxxxx..',
+    '.xxxxxxx.',
+    'xxxxxxxxx',
+    '....x....',
+    '...xxx...',
+    '..xxxxx..',
+    '.xxxxxxx.',
+  ],
+  'security': [
+    '..xxxxx..',
+    '.xxxxxxx.',
+    'xxxxxxxxx',
+    'xxxxxxxxx',
+    'xxxxxxxxx',
+    '.xxxxxxx.',
+    '..xxxxx..',
+    '...xxx...',
+    '....x....',
+  ],
+  'database': [
+    '.xxxxxxx.',
+    'xxxxxxxxx',
+    '.xxxxxxx.',
+    '..xxxxx..',
+    '.xxxxxxx.',
+    'xxxxxxxxx',
+    '.xxxxxxx.',
+    '..xxxxx..',
+    '.........',
+  ],
+  'accessibility': [
+    '...xxx...',
+    '...xxx...',
+    'xxxxxxxxx',
+    '....x....',
+    '...xxx...',
+    '..x.x.x..',
+    '.x..x..x.',
+    'x...x...x',
+    '.........',
+  ],
+  'devops': [
+    'xx.....xx',
+    'x.x...x.x',
+    'x..x.x..x',
+    'x...x...x',
+    'x.......x',
+    'x...x...x',
+    'x..x.x..x',
+    'x.x...x.x',
+    'xx.....xx',
+  ],
+  'eye-shield': [
+    '..xxxxx..',
+    '.x.....x.',
+    'x...x...x',
+    'x..xxx..x',
+    'x...x...x',
+    '.x.....x.',
+    '..xxxxx..',
+    '.........',
+    '.........',
+  ],
+  'mobile': [
+    '...xxx...',
+    '...x.x...',
+    '...x.x...',
+    '...x.x...',
+    '...x.x...',
+    '...x.x...',
+    '...xxx...',
+    '....x....',
+    '.........',
+  ],
+  'seo': [
+    '..xxxx...',
+    '.x....x..',
+    'x......x.',
+    'x......x.',
+    '.x....x..',
+    '..xxxx...',
+    '....x.x..',
+    '.....x.x.',
+    '......x..',
+  ],
+  'copywriting': [
+    '.......xx',
+    '......xx.',
+    '.....xx..',
+    '....xx...',
+    '...xx....',
+    '..xx.....',
+    '.xx......',
+    'xx.......',
+    'xxxxxxxxx',
+  ],
+  'social-media': [
+    '..x...x..',
+    '.xxx..x..',
+    'x.x..xxx.',
+    'x.x..x.x.',
+    'xxx..x.x.',
+    '.x..xxx..',
+    '.x...x...',
+    '.........',
+    '.........',
+  ],
+};
+
+function drawSkillIcon(canvas, iconKey, color) {
+  const ctx = canvas.getContext('2d');
+  const grid = ICON_PIXELS[iconKey];
+  if (!grid) {
+    const s = 4;
+    canvas.width = 9 * s;
+    canvas.height = 9 * s;
+    ctx.fillStyle = color;
+    ctx.fillRect(12, 12, 12, 12);
+    return;
+  }
+  const s = 4;
+  canvas.width = grid[0].length * s;
+  canvas.height = grid.length * s;
+  ctx.imageSmoothingEnabled = false;
+  ctx.fillStyle = color;
+  grid.forEach((row, y) => {
+    [...row].forEach((ch, x) => {
+      if (ch === 'x') ctx.fillRect(x * s, y * s, s, s);
+    });
+  });
+}
+
+function getGradeColor(grade) {
+  const colors = { SSS: '#ff6b6b', SS: '#ffd700', S: '#9b59b6', A: '#3498db', B: '#2ecc71', C: '#ecf0f1', D: '#95a5a6', F: '#4a4a4a' };
+  return colors[grade] || colors.F;
+}
+
+function drawPixelAvatar(canvas) {
+  const ctx = canvas.getContext('2d');
+  const s = 8;
+  canvas.width = 15 * s;
+  canvas.height = 15 * s;
+  ctx.imageSmoothingEnabled = false;
+
+  const skin = '#f5c49c';
+  const hair = '#4a3728';
+  const robe = '#6a5acd';
+  const robeDark = '#483d8b';
+  const belt = '#ffd700';
+  const staff = '#8b6914';
+  const gem = '#00ffcc';
+  const eye = '#2c2c2c';
+
+  const pixels = [
+    [0,0,0,0,0,0,hair,hair,hair,0,0,0,0,0,0],
+    [0,0,0,0,0,hair,hair,hair,hair,hair,0,0,0,0,0],
+    [0,0,0,0,hair,hair,hair,hair,hair,hair,hair,0,0,0,0],
+    [0,0,0,0,hair,skin,skin,skin,skin,skin,hair,0,0,0,0],
+    [0,0,0,0,skin,skin,eye,skin,eye,skin,skin,0,0,0,0],
+    [0,0,0,0,skin,skin,skin,skin,skin,skin,skin,0,0,0,0],
+    [0,0,0,0,0,skin,skin,skin,skin,skin,0,0,0,0,0],
+    [0,0,0,0,robe,robe,robe,robe,robe,robe,robe,0,staff,0,0],
+    [0,0,0,robe,robe,robe,belt,belt,belt,robe,robe,robe,staff,0,0],
+    [0,0,0,robe,robe,robe,robe,robe,robe,robe,robe,robe,staff,0,0],
+    [0,0,robe,robe,robeDark,robe,robe,robe,robe,robeDark,robe,robe,staff,0,0],
+    [0,0,robe,robe,robeDark,robe,robe,robe,robe,robeDark,robe,robe,gem,0,0],
+    [0,robe,robe,robeDark,robeDark,robe,robe,robe,robe,robeDark,robeDark,robe,staff,0,0],
+    [0,robe,0,0,0,skin,0,0,0,skin,0,0,robe,0,0],
+    [0,0,0,0,skin,skin,0,0,0,skin,skin,0,0,0,0],
+  ];
+
+  pixels.forEach((row, y) => {
+    row.forEach((color, x) => {
+      if (color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(x * s, y * s, s, s);
+      }
+    });
+  });
+}
+
+let pendingDelete = null;
+
+function showDeleteModal(skill) {
+  pendingDelete = skill;
+  const modal = document.getElementById('deleteModal');
+  document.getElementById('modalDesc').textContent =
+    `"${skill.name}" 스킬을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.`;
+  modal.classList.add('active');
+}
+
+function hideDeleteModal() {
+  document.getElementById('deleteModal').classList.remove('active');
+  pendingDelete = null;
+}
+
+function deleteSkill() {
+  if (!pendingDelete) return;
+  DATA.skills = DATA.skills.filter(s => s.name !== pendingDelete.name);
+  hideDeleteModal();
+  renderProfile();
+  renderInventory();
+}
+
+function upgradeSkill(skill) {
+  const cmd = `/upgrade ${skill.name}`;
+  navigator.clipboard.writeText(cmd).then(() => {
+    const toast = document.getElementById('toast');
+    toast.textContent = `"${cmd}" 클립보드에 복사됨! Claude Code에서 붙여넣기하세요.`;
+    toast.classList.add('active');
+    setTimeout(() => toast.classList.remove('active'), 3000);
+  });
+}
+
+document.getElementById('modalCancel').onclick = hideDeleteModal;
+document.getElementById('modalConfirm').onclick = deleteSkill;
+
+function renderProfile() {
+  const { profile, skills, categories } = DATA;
+  const categoryCounts = {};
+  categories.forEach(c => categoryCounts[c] = 0);
+  skills.forEach(s => { if (categoryCounts[s.category] !== undefined) categoryCounts[s.category]++; });
+  const maxCount = Math.max(...Object.values(categoryCounts), 1);
+
+  const barsHtml = categories.map(cat => `
+    <div class="bar-row">
+      <span class="bar-label">${cat}</span>
+      <div class="bar-track">
+        <div class="bar-fill" style="width: ${(categoryCounts[cat] / maxCount) * 100}%"></div>
+      </div>
+      <span class="bar-count">${categoryCounts[cat]}</span>
+    </div>
+  `).join('');
+
+  document.getElementById('profile').innerHTML = `
+    <div class="profile-left">
+      <div class="avatar"><canvas class="avatar-canvas" id="avatarCanvas"></canvas></div>
+      <div class="username">${profile.username}</div>
+      <div class="level">Lv. ${profile.level}</div>
+      <div class="job-name">${profile.jobName}</div>
+    </div>
+    <div class="profile-right">
+      ${barsHtml}
+    </div>
+  `;
+
+  drawPixelAvatar(document.getElementById('avatarCanvas'));
+}
+
+function renderInventory() {
+  const { skills, categories } = DATA;
+  const grouped = {};
+  categories.forEach(c => grouped[c] = []);
+  skills.forEach(s => { if (grouped[s.category]) grouped[s.category].push(s); });
+
+  const gradeOrder = ['SSS', 'SS', 'S', 'A', 'B', 'C', 'D', 'F'];
+  Object.keys(grouped).forEach(cat => {
+    grouped[cat].sort((a, b) => gradeOrder.indexOf(a.grade) - gradeOrder.indexOf(b.grade));
+  });
+
+  const html = categories.map(cat => {
+    if (grouped[cat].length === 0) return '';
+    const cardsHtml = grouped[cat].map((skill, idx) => {
+      const scopes = skill.scopes || {};
+      const cardId = `skill-${cat}-${idx}`;
+      const tooltipIconId = `tooltip-icon-${cat}-${idx}`;
+      return `
+      <div class="skill-card" data-grade="${skill.grade}" id="${cardId}">
+        <span class="skill-grade-badge">${skill.grade}</span>
+        ${skill.upgraded ? '<span class="upgraded-badge">\u2728</span>' : ''}
+        <div class="skill-icon"><canvas data-icon="${skill.iconKey || ''}" data-color="${getGradeColor(skill.grade)}"></canvas></div>
+        <div class="skill-name">${skill.name}</div>
+        <div class="tooltip" style="border-top: 2px solid ${getGradeColor(skill.grade)}">
+          <div class="tooltip-header">
+            <div class="skill-icon"><canvas id="${tooltipIconId}" data-icon="${skill.iconKey || ''}" data-color="${getGradeColor(skill.grade)}"></canvas></div>
+            <span class="tooltip-name">${skill.name}</span>
+            <span class="tooltip-grade" style="color: ${getGradeColor(skill.grade)}">${skill.grade}</span>
+          </div>
+          <div class="tooltip-category">\u{1F4C2} ${skill.category}</div>
+          <div class="tooltip-trigger">\u26A1 ${skill.trigger}</div>
+          <div class="tooltip-desc">"${skill.description}"</div>
+          <div class="tooltip-stats">
+            <div class="tooltip-stat">
+              <span>\u{1F4CA} 월간 사용</span>
+              <span class="tooltip-stat-value">${skill.monthlyUsage}회</span>
+            </div>
+            <div class="tooltip-stat">
+              <span>\u{1FA99} 토큰 비용</span>
+              <span class="tooltip-stat-value">${skill.tokenCost.toLocaleString()}</span>
+            </div>
+            <div class="tooltip-stat">
+              <span>\u{1F9EA} 테스트 코드</span>
+              <span class="tooltip-stat-value ${skill.hasTestCode ? 'covered' : 'not-covered'}">${skill.hasTestCode ? '있음' : '없음'}</span>
+            </div>
+          </div>
+          <div class="tooltip-scope">
+            <span class="scope-badge ${scopes.user ? '' : 'inactive'}">user</span>
+            <span class="scope-badge ${scopes.project ? '' : 'inactive'}">project</span>
+            <span class="scope-badge ${scopes.plugin ? '' : 'inactive'}">plugin</span>
+          </div>
+          <div class="tooltip-actions">
+            <button class="action-btn upgrade ${skill.upgraded ? 'done' : ''}" onclick="event.stopPropagation(); upgradeSkill(DATA.skills.find(s=>s.name==='${skill.name.replace(/'/g, "\\'")}'  ))" ${skill.upgraded ? 'disabled' : ''} aria-label="${skill.name} 강화">${skill.upgraded ? '\u2728 강화 완료' : '\u2B06\uFE0F 강화'}</button>
+            <button class="action-btn danger" onclick="event.stopPropagation(); showDeleteModal(DATA.skills.find(s=>s.name==='${skill.name.replace(/'/g, "\\'")}'  ))" aria-label="${skill.name} 삭제">\u{1F5D1} 삭제</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+
+    return `
+      <div class="category-group">
+        <div class="category-title">${cat}</div>
+        <div class="skill-grid">${cardsHtml}</div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('inventory').innerHTML = html;
+
+  document.querySelectorAll('.skill-icon canvas[data-icon]').forEach(canvas => {
+    const iconKey = canvas.dataset.icon;
+    const color = canvas.dataset.color;
+    drawSkillIcon(canvas, iconKey, color);
+  });
+}
+
+renderProfile();
+renderInventory();
+</script>
+</body>
+</html>
