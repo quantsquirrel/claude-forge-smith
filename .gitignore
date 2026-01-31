@@ -1,0 +1,36 @@
+# Runtime state (contains session data, prompts)
+.omc/
+
+# Detection logs (runtime generated)
+data/detections/
+
+# OTEL session context
+*.ctx
+
+# Local skill evaluator storage
+.skill-evaluator/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Node (if applicable)
+node_modules/
+
+# Python (if applicable)
+__pycache__/
+*.pyc
+.venv/
