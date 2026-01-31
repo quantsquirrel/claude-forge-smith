@@ -70,9 +70,9 @@ AI 에이전트 스킬을 자동으로 분석, 평가, 개선합니다. 테스�
 
 ## 설계 결정
 
-이 섹션은 **Synod** (다중 평가자 합의 메커니즘) 검증을 반영합니다.
+이 섹션은 다중 평가자 합의 메커니즘 검증을 반영합니다.
 
-### 필수 구현 (Synod 80% 합의)
+### 핵심 설계 원칙
 
 #### 1. 평가 에이전트 분리 원칙
 
@@ -410,7 +410,7 @@ v0.5: 초기 구현 (점수: N/A)
       - Trial Branch 전략
       - 기본 평가 메커니즘
 
-v0.6: Synod 검증 반영 (기준선: 71점)
+v0.6: 다중 평가자 검증 반영 (기준선: 71점)
       - 평가 에이전트 분리 (evaluator.md)
       - 3회 복수 평가 + 신뢰구간
       - Lazy Detection (Write/Edit만)
@@ -437,7 +437,7 @@ v0.8 ~ v1.0: 예정
 - **Gödel Machines:** Schmidhuber, J. (2007). "Gödel Machines: Fully Self-Referential Optimal Agents"
 - **DGM (Dynamic Gödel Machines):** 동적 환경 적응 메커니즘
 - **TDD Safety in Self-Improving Systems:** 테스트를 통한 자기 참조 순환 방지
-- **Synod Evaluation Pattern:** 다중 평가자 합의를 통한 신뢰성 향상
+- **Multi-Evaluator Consensus:** 다중 평가자 합의를 통한 신뢰성 향상
 
 ---
 
