@@ -70,20 +70,10 @@ This plugin is inspired by groundbreaking research:
 
 **Core insight:** Tests define the boundaries of change
 
-```
-┌─────────────────────────────────────────┐
-│  Test Suite = Immutable Interface       │
-│         (external contract)             │
-└───────────────┬─────────────────────────┘
-                ↓
-┌─────────────────────────────────────────┐
-│  Implementation can change anytime      │
-│      as long as tests pass              │
-└───────────────┬─────────────────────────┘
-                ↓
-┌─────────────────────────────────────────┐
-│     Prevents circular evaluation        │
-└─────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A["Test Suite = Immutable Interface<br/>(external contract)"] --> B["Implementation can change anytime<br/>as long as tests pass"]
+    B --> C["Prevents circular evaluation"]
 ```
 
 ### 6-Iteration Optimization Curve
@@ -105,22 +95,14 @@ This plugin is inspired by groundbreaking research:
 
 #### 1️⃣ Evaluator Agent Separation
 
-```
-❌ Unsafe:
-   Improvement Agent → Evaluates own results → Bias/Circular
+❌ **Unsafe:** Improvement Agent → Evaluates own results → Bias/Circular
 
-✅ Correct:
-   ┌──────────────────┐
-   │ Improvement Agent │ (Executor)
-   └────────┬─────────┘
-            ↓ submits
-   ┌──────────────────┐
-   │ Evaluation Agent  │ (Independent)
-   └────────┬─────────┘
-            ↓ results
-   ┌──────────────────┐
-   │   Orchestrator    │ Accept/Reject
-   └──────────────────┘
+✅ **Correct:**
+
+```mermaid
+flowchart TD
+    A["Improvement Agent<br/>(Executor)"] -->|submits| B["Evaluation Agent<br/>(Independent)"]
+    B -->|results| C["Orchestrator<br/>Accept/Reject"]
 ```
 
 #### 2️⃣ Multiple Evaluations + Confidence Intervals
@@ -134,15 +116,17 @@ This plugin is inspired by groundbreaking research:
 
 #### 3️⃣ Trial Branch Strategy
 
+```mermaid
+gitGraph
+    commit id: "main"
+    branch trial/skill-name
+    commit id: "improve"
+    commit id: "evaluate"
+    checkout main
+    merge trial/skill-name id: "merge (success)" type: HIGHLIGHT
 ```
-main ──────────────────────────────────────►
-        │                           ▲
-        │ branch                    │ merge (on success)
-        ▼                           │
-     trial/skill-name ──► evaluate ─┘
-                              │
-                              └──► discard (on failure)
-```
+
+> On failure, trial branch is discarded without merging.
 
 ### Implementation Details
 
@@ -184,41 +168,19 @@ main ─────────────────────────
 
 ### 3. Automatic Upgrade Loop
 
-```
-   ┌─────────────────────────────────────────────┐
-   │              skill-forge:forge              │
-   └─────────────────────────────────────────────┘
-                        │
-            ┌───────────┴───────────┐
-            ▼                       │
-   ┌─────────────────┐              │
-   │ 1. TDD-Fit Check │              │
-   └────────┬────────┘              │
-            ▼                       │
-   ┌─────────────────┐              │
-   │ 2. Trial Branch  │              │
-   └────────┬────────┘              │
-            ▼                       │
-   ┌─────────────────┐              │
-   │ 3. Improve Skill │              │
-   └────────┬────────┘              │
-            ▼                       │
-   ┌─────────────────┐              │
-   │ 4. Evaluate (x3) │              │
-   └────────┬────────┘              │
-            ▼                       │
-   ┌─────────────────┐              │
-   │ 5. CI Comparison │              │
-   └────────┬────────┘              │
-        ┌───┴───┐                   │
-        ▼       ▼                   │
-      YES      NO                   │
-        │       │                   │
-   ┌────┴──┐ ┌──┴────┐              │
-   │ Merge │ │Discard│              │
-   └───────┘ └───────┘              │
-        │                           │
-        └───── max 6 iterations ────┘
+```mermaid
+flowchart TD
+    START["skill-forge:forge"] --> A["1. TDD-Fit Check"]
+    A --> B["2. Trial Branch"]
+    B --> C["3. Improve Skill"]
+    C --> D["4. Evaluate (x3)"]
+    D --> E["5. CI Comparison"]
+    E -->|Improved?| F{Decision}
+    F -->|YES| G["✅ Merge"]
+    F -->|NO| H["❌ Discard"]
+    G --> I{{"max 6 iterations"}}
+    I -->|continue| A
+    I -->|done| END["SUCCESS"]
 ```
 
 ### 4. Safe Rollback
