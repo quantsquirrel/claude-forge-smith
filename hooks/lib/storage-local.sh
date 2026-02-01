@@ -253,3 +253,188 @@ find_skill_path() {
     echo ""
     return 1
 }
+
+# ------------------------------------------------------------------------------
+# 스킬 유형 판별 함수 (신규 추가)
+# ------------------------------------------------------------------------------
+
+# 스킬 유형 판별
+# Usage: get_skill_type "skill-name" "skill_file_path"
+# Output: "explicit" | "silent"
+#
+# explicit: 사용자가 명시적으로 /명령어로 호출 (예: synod, forge)
+# silent: 상황에 맞으면 자동으로 호출 (예: git-master, frontend-ui-ux)
+get_skill_type() {
+    local skill_name="$1"
+    local skill_file="$2"
+
+    # 스킬 파일이 없으면 경로 찾기
+    if [ -z "$skill_file" ] || [ ! -f "$skill_file" ]; then
+        local skill_dir=$(find_skill_path "$skill_name")
+        if [ -n "$skill_dir" ]; then
+            skill_file="$skill_dir/SKILL.md"
+        fi
+    fi
+
+    if [ ! -f "$skill_file" ]; then
+        echo "unknown"
+        return 1
+    fi
+
+    python3 << PYTHON_SCRIPT
+import re
+
+with open("$skill_file", "r") as f:
+    content = f.read()
+
+# Extract frontmatter
+frontmatter_match = re.search(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+if not frontmatter_match:
+    print("unknown")
+    exit(0)
+
+frontmatter = frontmatter_match.group(1)
+
+# Check for argument-hint (explicit indicator)
+has_argument_hint = bool(re.search(r'argument-hint:', frontmatter))
+
+# Check description length and trigger keywords
+desc_match = re.search(r"description:\s*['\"]?(.+?)['\"]?\s*$", frontmatter, re.MULTILINE)
+description = desc_match.group(1) if desc_match else ""
+
+# Silent skill indicators
+has_triggers_on = "Triggers on" in description or "triggers on" in description
+desc_length = len(description)
+has_many_keywords = description.count(",") >= 3  # Multiple trigger keywords
+
+# Explicit skill indicators
+is_short_description = desc_length < 100
+has_mode_hint = "mode" in description.lower() or "modes:" in description.lower()
+
+# Decision logic
+if has_argument_hint:
+    print("explicit")
+elif has_triggers_on or has_many_keywords:
+    print("silent")
+elif is_short_description and not has_triggers_on:
+    print("explicit")
+else:
+    print("silent")
+PYTHON_SCRIPT
+}
+
+# 스킬 품질 점수 계산 (유형별 기준 적용)
+# Usage: get_skill_quality_score "skill-name" "skill_file_path"
+# Output: JSON with score and breakdown
+get_skill_quality_score() {
+    local skill_name="$1"
+    local skill_file="$2"
+
+    # 스킬 파일이 없으면 경로 찾기
+    if [ -z "$skill_file" ] || [ ! -f "$skill_file" ]; then
+        local skill_dir=$(find_skill_path "$skill_name")
+        if [ -n "$skill_dir" ]; then
+            skill_file="$skill_dir/SKILL.md"
+        fi
+    fi
+
+    if [ ! -f "$skill_file" ]; then
+        echo '{"score": 0, "type": "unknown", "error": "skill file not found"}'
+        return 1
+    fi
+
+    local skill_type=$(get_skill_type "$skill_name" "$skill_file")
+
+    python3 << PYTHON_SCRIPT
+import re
+import json
+
+with open("$skill_file", "r") as f:
+    content = f.read()
+
+skill_type = "$skill_type"
+score = 0
+breakdown = {}
+
+# Extract frontmatter
+frontmatter_match = re.search(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+frontmatter = frontmatter_match.group(1) if frontmatter_match else ""
+
+# Extract body (after frontmatter)
+body = content[frontmatter_match.end():] if frontmatter_match else content
+
+# Common checks
+has_quick_reference = bool(re.search(r'##.*Quick Reference', body, re.IGNORECASE))
+has_when_to_use = bool(re.search(r'##.*When to Use', body, re.IGNORECASE))
+has_workflow = bool(re.search(r'##.*Workflow', body, re.IGNORECASE))
+has_examples = bool(re.search(r'##.*Example', body, re.IGNORECASE))
+has_red_flags = bool(re.search(r'##.*Red Flag', body, re.IGNORECASE))
+
+if skill_type == "explicit":
+    # EXPLICIT SKILL SCORING (명시적 호출 스킬)
+    # Focus: 사용법 명확성, 옵션 설명, 모드 안내
+
+    # 1. argument-hint 존재 (25점)
+    has_argument_hint = bool(re.search(r'argument-hint:', frontmatter))
+    breakdown["argument_hint"] = 25 if has_argument_hint else 0
+
+    # 2. 모드/옵션 설명 (25점)
+    has_modes = bool(re.search(r'mode|option|argument', body, re.IGNORECASE))
+    has_mode_table = bool(re.search(r'\|.*mode.*\|', body, re.IGNORECASE))
+    breakdown["mode_options"] = 25 if (has_modes and has_mode_table) else (15 if has_modes else 0)
+
+    # 3. Quick Reference 테이블 (20점)
+    breakdown["quick_reference"] = 20 if has_quick_reference else 0
+
+    # 4. 워크플로우/단계 설명 (15점)
+    breakdown["workflow"] = 15 if has_workflow else 0
+
+    # 5. 예시 (15점)
+    breakdown["examples"] = 15 if has_examples else 0
+
+else:
+    # SILENT SKILL SCORING (자동 트리거 스킬)
+    # Focus: 발견성, 트리거 정확도, 오탐 방지
+
+    desc_match = re.search(r"description:\s*['\"]?(.+?)['\"]?\s*$", frontmatter, re.MULTILINE)
+    description = desc_match.group(1) if desc_match else ""
+
+    # 1. "Use when" 으로 시작 (15점)
+    starts_with_use_when = description.lower().startswith("use when")
+    breakdown["use_when_prefix"] = 15 if starts_with_use_when else 0
+
+    # 2. 트리거 키워드 풍부함 (20점)
+    keyword_count = description.count(",") + 1
+    if keyword_count >= 5:
+        breakdown["trigger_keywords"] = 20
+    elif keyword_count >= 3:
+        breakdown["trigger_keywords"] = 15
+    else:
+        breakdown["trigger_keywords"] = 5
+
+    # 3. When to Use 섹션 (20점)
+    breakdown["when_to_use"] = 20 if has_when_to_use else 0
+
+    # 4. Red Flags 섹션 - 오탐 방지 (15점)
+    breakdown["red_flags"] = 15 if has_red_flags else 0
+
+    # 5. Quick Reference (15점)
+    breakdown["quick_reference"] = 15 if has_quick_reference else 0
+
+    # 6. 예시 (15점)
+    breakdown["examples"] = 15 if has_examples else 0
+
+score = sum(breakdown.values())
+
+result = {
+    "skill_name": "$skill_name",
+    "skill_type": skill_type,
+    "score": score,
+    "breakdown": breakdown,
+    "max_score": 100,
+    "grade": "A" if score >= 80 else "B" if score >= 60 else "C" if score >= 40 else "D"
+}
+
+print(json.dumps(result, indent=2))
+PYTHON_SCRIPT
+}

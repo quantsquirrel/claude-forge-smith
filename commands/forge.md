@@ -1,6 +1,7 @@
 ---
 name: skill-up:upgrade-skill
 description: Upgrade a skill through TDD-based testing and improvement. Creates scenario tests, evaluates discoverability, and enhances skill quality.
+argument-hint: <skill-name> [--precision=high|-n5] - modes: TDD_FIT|HEURISTIC
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Task, Skill
 user-invocable: true
 ---
