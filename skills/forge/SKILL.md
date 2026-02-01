@@ -1,7 +1,7 @@
 ---
 name: skill-forge:forge
 description: Use when you want to systematically upgrade a skill's quality through TDD-based evaluation. 복수 평가 + 신뢰구간으로 유의미한 향상 검증.
-argument-hint: <skill-name> [--precision=high|-n5] [--dry-run] - modes: TDD_FIT|HEURISTIC
+argument-hint: <skill-name> [--precision=high|medium|low (default: high)] [--dry-run] - modes: TDD_FIT|HEURISTIC
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Task, Skill
 user-invocable: true
 ---

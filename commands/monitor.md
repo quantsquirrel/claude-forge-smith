@@ -1,7 +1,7 @@
 ---
 name: skill-forge:monitor
 description: Use when you want to see skill usage trends, identify underused skills, or get upgrade recommendations. Triggers on 스킬 모니터링, 사용량 분석, 추천, /monitor, skill monitor, usage dashboard
-argument-hint: [--priority=HIGH|MED|LOW] [--type=explicit|silent|all]
+argument-hint: [--priority=HIGH|MED|LOW (default: all)] [--type=explicit|silent|all (default: all)]
 allowed-tools: Read, Glob, Bash
 user-invocable: true
 ---
