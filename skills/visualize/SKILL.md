@@ -21,6 +21,20 @@ Render the user's skill inventory as a gamified RPG-style character sheet in the
 
 See `reference.md` in this directory for JSON schemas, grade tables, categories, and icon keys.
 
+## Arguments
+
+| Argument | Description | Default |
+|----------|-------------|---------|
+| `--month=YYYY-MM` | 특정 월의 데이터로 시각화 | 현재 월 |
+| `--format=html\|text` | 출력 형식 (html: 브라우저, text: 터미널) | html |
+
+## Mode Options
+
+| Mode | Description |
+|------|-------------|
+| **html** (default) | RPG 스타일 캐릭터 시트를 브라우저에서 렌더링 |
+| **text** | 터미널에서 텍스트 요약 출력 (HTML도 함께 생성) |
+
 ## Workflow
 
 1. **Read evaluation data**: Current month file at `~/.claude/.skill-evaluator/skills/{YYYY-MM}.json`
@@ -50,6 +64,22 @@ See `reference.md` in this directory for JSON schemas, grade tables, categories,
 ## Upgrade Feature
 
 Tooltip has "강화" button → copies `/upgrade-skill {skill-name}` to clipboard → toast notification. Upgraded skills (`upgraded: true`) show badge and disabled "강화 완료" button.
+
+## Example Usage
+
+```
+User: "/visualize"
+→ 현재 월 데이터로 HTML 캐릭터 시트 생성, 브라우저에서 열기
+
+User: "스탯창 보여줘"
+→ 동일하게 전체 시각화 워크플로우 실행
+
+User: "/visualize --month=2026-01"
+→ 2026년 1월 데이터로 시각화
+
+User: "내 스킬 텍스트로 보여줘"
+→ HTML 생성 + 터미널에 텍스트 요약도 출력
+```
 
 ## Response
 
