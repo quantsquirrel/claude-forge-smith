@@ -11,10 +11,10 @@
 
 ### ⚔️ Forge your skills into legendary weapons
 
-[![Version](https://img.shields.io/badge/v1.0-FFB800?style=flat-square&logoColor=1A0A00)](https://github.com/quantsquirrel/claude-skill-forge)
-[![Tests](https://img.shields.io/badge/tests-passing-FF6B00?style=flat-square)](https://github.com/quantsquirrel/claude-skill-forge)
+[![Version](https://img.shields.io/badge/v1.0-FFB800?style=flat-square&logoColor=1A0A00)](https://github.com/quantsquirrel/claude-forge-smith)
+[![Tests](https://img.shields.io/badge/tests-passing-FF6B00?style=flat-square)](https://github.com/quantsquirrel/claude-forge-smith)
 [![License](https://img.shields.io/badge/MIT-FFD700?style=flat-square)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/quantsquirrel/claude-skill-forge?style=flat-square&color=FF6B00)](https://github.com/quantsquirrel/claude-skill-forge)
+[![Stars](https://img.shields.io/github/stars/quantsquirrel/claude-forge-smith?style=flat-square&color=FF6B00)](https://github.com/quantsquirrel/claude-forge-smith)
 
 **TDD-powered automatic skill evolution for Claude Code**
 
@@ -78,7 +78,7 @@ Before firing up the forge, ensure you have the required tools:
 
 ```bash
 # Install the forge
-git clone https://github.com/quantsquirrel/claude-skill-forge.git \
+git clone https://github.com/quantsquirrel/claude-forge-smith.git \
   ~/.claude/plugins/local/skill-forge
 
 # Ignite the flames

@@ -11,10 +11,10 @@
 
 ### ⚔️ 스킬을 전설의 무기로 단조하세요
 
-[![Version](https://img.shields.io/badge/v1.0-FFB800?style=flat-square&logoColor=1A0A00)](https://github.com/quantsquirrel/claude-skill-forge)
-[![Tests](https://img.shields.io/badge/tests-passing-FF6B00?style=flat-square)](https://github.com/quantsquirrel/claude-skill-forge)
+[![Version](https://img.shields.io/badge/v1.0-FFB800?style=flat-square&logoColor=1A0A00)](https://github.com/quantsquirrel/claude-forge-smith)
+[![Tests](https://img.shields.io/badge/tests-passing-FF6B00?style=flat-square)](https://github.com/quantsquirrel/claude-forge-smith)
 [![License](https://img.shields.io/badge/MIT-FFD700?style=flat-square)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/quantsquirrel/claude-skill-forge?style=flat-square&color=FF6B00)](https://github.com/quantsquirrel/claude-skill-forge)
+[![Stars](https://img.shields.io/github/stars/quantsquirrel/claude-forge-smith?style=flat-square&color=FF6B00)](https://github.com/quantsquirrel/claude-forge-smith)
 
 **TDD 기반 Claude Code 스킬 자동 진화 엔진**
 
@@ -56,7 +56,7 @@ graph LR
 
 ```bash
 # 대장간 설치
-git clone https://github.com/quantsquirrel/claude-skill-forge.git \
+git clone https://github.com/quantsquirrel/claude-forge-smith.git \
   ~/.claude/plugins/local/skill-forge
 
 # 불꽃 점화

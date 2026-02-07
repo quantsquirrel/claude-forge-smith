@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Planned
-See [GitHub Issues](https://github.com/quantsquirrel/claude-skill-forge/issues) for planned features and community feedback.
+See [GitHub Issues](https://github.com/quantsquirrel/claude-forge-smith/issues) for planned features and community feedback.
 
 ## [1.0.0] - 2026-02-01
 
@@ -76,8 +76,8 @@ Each version improvement follows the skill-forge protocol:
 
 ---
 
-[Unreleased]: https://github.com/quantsquirrel/claude-skill-forge/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/quantsquirrel/claude-skill-forge/releases/tag/v1.0.0
-[0.7]: https://github.com/quantsquirrel/claude-skill-forge/releases/tag/v0.7
-[0.6]: https://github.com/quantsquirrel/claude-skill-forge/releases/tag/v0.6
-[0.5]: https://github.com/quantsquirrel/claude-skill-forge/releases/tag/v0.5
+[Unreleased]: https://github.com/quantsquirrel/claude-forge-smith/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/quantsquirrel/claude-forge-smith/releases/tag/v1.0.0
+[0.7]: https://github.com/quantsquirrel/claude-forge-smith/releases/tag/v0.7
+[0.6]: https://github.com/quantsquirrel/claude-forge-smith/releases/tag/v0.6
+[0.5]: https://github.com/quantsquirrel/claude-forge-smith/releases/tag/v0.5

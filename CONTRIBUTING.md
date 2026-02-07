@@ -18,8 +18,8 @@ Thank you for your interest in contributing to skill-forge! This guide will help
 ### Fork & Clone
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/claude-skill-forge.git
-cd claude-skill-forge
+git clone https://github.com/YOUR_USERNAME/claude-forge-smith.git
+cd claude-forge-smith
 ```
 
 ### Running Tests Locally
@@ -152,4 +152,4 @@ This project follows the [Contributor Covenant Code of Conduct](https://www.cont
 
 ## Questions?
 
-Open a [Discussion](https://github.com/quantsquirrel/claude-skill-forge/discussions) for questions, or an [Issue](https://github.com/quantsquirrel/claude-skill-forge/issues) for bugs and feature requests.
+Open a [Discussion](https://github.com/quantsquirrel/claude-forge-smith/discussions) for questions, or an [Issue](https://github.com/quantsquirrel/claude-forge-smith/issues) for bugs and feature requests.
