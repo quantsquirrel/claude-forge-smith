@@ -1,6 +1,6 @@
-# Contributing to skill-forge
+# Contributing to Forge (claude-forge-smith)
 
-Thank you for your interest in contributing to skill-forge! This guide will help you get started.
+Thank you for your interest in contributing to Forge! This guide will help you get started.
 
 ## Getting Started
 
@@ -38,7 +38,7 @@ bash tests/e2e/trial-branch-e2e.test.sh
 bash tests/e2e/forge-workflow-e2e.test.sh
 
 # Tier 3: Real AI E2E (optional, requires Claude Code)
-SKILL_FORGE_AI_TESTS=true bash tests/e2e/forge-workflow-e2e.test.sh
+FORGE_AI_TESTS=true bash tests/e2e/forge-workflow-e2e.test.sh
 ```
 
 ## Development Workflow
@@ -96,7 +96,7 @@ chore: maintenance task
 |------|-----------|-------------|-------------|
 | 1 | `tests/unit/` | Yes | Pure function tests (statistics, storage, detection) |
 | 2 | `tests/integration/`, `tests/e2e/` | Yes | Hook integration + Mock evaluator E2E |
-| 3 | `tests/e2e/` | No | Real AI evaluator (manual, `SKILL_FORGE_AI_TESTS=true`) |
+| 3 | `tests/e2e/` | No | Real AI evaluator (manual, `FORGE_AI_TESTS=true`) |
 
 ### Writing Tests
 
@@ -143,7 +143,7 @@ hooks/lib/
 |----------|---------|-------------|
 | `CLAUDE_PLUGIN_ROOT` | Set by Claude plugin system | Plugin installation path |
 | `FORGE_EVALUATOR_CMD` | Built-in evaluator | Custom evaluator script path |
-| `SKILL_FORGE_AI_TESTS` | `false` | Enable real AI E2E tests |
+| `FORGE_AI_TESTS` | `false` | Enable real AI E2E tests |
 | `STORAGE_MODE` | `local` | Storage backend (`local` or `otel`) |
 
 ## Code of Conduct

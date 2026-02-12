@@ -5,7 +5,7 @@
 
 ## Purpose
 
-Shared shell library functions for all hooks. Provides configuration loading, storage abstraction, statistics calculation, trial branch management, and skill detection utilities.
+Shared shell library functions for all hooks. Provides configuration loading, storage abstraction, statistics calculation, trial branch management, and Forge detection utilities.
 
 ## Key Files
 
@@ -13,7 +13,7 @@ Shared shell library functions for all hooks. Provides configuration loading, st
 |------|-------------|
 | `common.sh` | Main loader - sources config and storage backend, JSON parsing helpers |
 | `config.sh` | Configuration loading from `../../config/settings.env` |
-| `recommendation-engine.sh` | Quality-based recommendation engine for skill forge prioritization |
+| `recommendation-engine.sh` | Quality-based recommendation engine for Forge prioritization |
 | `skill-detector.sh` | Lazy detection - identifies skill file changes on Write/Edit |
 | `statistics.sh` | Statistical functions: mean, stddev, 95% CI, CI separation check |
 | `storage-local.sh` | Local file storage backend for skill metrics |

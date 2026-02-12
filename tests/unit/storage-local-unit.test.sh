@@ -15,7 +15,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 # Test isolation: use temp dir for storage
-export LOCAL_STORAGE_DIR="/tmp/skill-forge-test-storage-$$"
+export LOCAL_STORAGE_DIR="/tmp/forge-test-storage-$$"
 mkdir -p "$LOCAL_STORAGE_DIR/skills"
 
 # Noop debug_log before sourcing libs
@@ -155,7 +155,7 @@ test_st6_skill_type() {
     echo "ST-6: get_skill_type returns valid type"
 
     # Create a temporary skill file to test with
-    local tmp_skill_dir="/tmp/skill-forge-test-skill-$$"
+    local tmp_skill_dir="/tmp/forge-test-skill-$$"
     mkdir -p "$tmp_skill_dir"
 
     # Create an explicit-style skill file (has argument-hint)

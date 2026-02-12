@@ -276,8 +276,8 @@ find_skill_path() {
 
     # 검색 순서: skills/ -> commands/ -> ~/.claude/skills/ -> ~/.claude/plugins/
     local search_paths=(
-        "${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/plugins/local/skill-forge}/skills"
-        "${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/plugins/local/skill-forge}/commands"
+        "${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/plugins/local/forge}/skills"
+        "${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/plugins/local/forge}/commands"
         "${CLAUDE_ROOT:-$HOME/.claude}/skills"
         "${CLAUDE_ROOT:-$HOME/.claude}/plugins"
     )

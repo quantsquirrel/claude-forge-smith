@@ -12,7 +12,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 # Test isolation: use temp dir for storage
-export LOCAL_STORAGE_DIR="/tmp/skill-forge-test-rec-$$"
+export LOCAL_STORAGE_DIR="/tmp/forge-test-rec-$$"
 mkdir -p "$LOCAL_STORAGE_DIR/skills"
 
 # Noop debug_log before sourcing libs

@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a bug or unexpected behavior in skill-forge
+about: Report a bug or unexpected behavior in Forge
 title: "[BUG] "
 labels: bug
 ---
@@ -21,7 +21,7 @@ A clear and concise description of what you expected to happen.
 - OS: [e.g., macOS 13.0, Ubuntu 22.04]
 - Bash version: [output of `bash --version`]
 - Claude Code CLI version: [output of `claude --version`]
-- skill-forge version: [e.g., v1.1]
+- Forge version: [e.g., v1.1]
 
 ## Additional context
 - Logs (if available): `cat ~/.claude/.skill-evaluator/logs/*.log`

@@ -1,12 +1,12 @@
-# The Theory Behind skill-forge
+# The Theory Behind Forge
 
 ## Overview
 
-skill-forge applies software engineering rigor — specifically Test-Driven Development (TDD) and statistical validation — to the problem of improving AI agent skills.
+Forge applies software engineering rigor — specifically Test-Driven Development (TDD) and statistical validation — to the problem of improving AI agent skills.
 
 ## TDD-Based Skill Evolution
 
-Traditional skill improvement relies on subjective human judgment: "Does this version feel better?" skill-forge replaces this with a measurable, repeatable process:
+Traditional skill improvement relies on subjective human judgment: "Does this version feel better?" Forge replaces this with a measurable, repeatable process:
 
 1. **Baseline Measurement**: Evaluate the current skill 3 times independently
 2. **Improvement Attempt**: Make changes in an isolated Trial Branch
@@ -83,9 +83,9 @@ The evaluator follows a rubric with 4 scoring dimensions (0-100 each):
 
 ## Theoretical Foundation
 
-skill-forge draws inspiration from **Gödel Machines** (Schmidhuber, 2006) — self-referential systems that can modify their own code, but only when the modification is provably beneficial.
+Forge draws inspiration from **Gödel Machines** (Schmidhuber, 2006) — self-referential systems that can modify their own code, but only when the modification is provably beneficial.
 
-In skill-forge's case, "provably beneficial" is operationalized as "statistically significant improvement with 95% confidence" — a practical approximation of formal proof that works in the noisy world of AI-generated evaluations.
+In Forge's case, "provably beneficial" is operationalized as "statistically significant improvement with 95% confidence" — a practical approximation of formal proof that works in the noisy world of AI-generated evaluations.
 
 ## References
 

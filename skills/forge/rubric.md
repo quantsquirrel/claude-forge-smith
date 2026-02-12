@@ -122,4 +122,4 @@ user-invocable: false
 
 - **Version**: 1.0.0
 - **Last Updated**: 2026-01-28
-- **Maintained By**: Skill Forge System
+- **Maintained By**: Forge System

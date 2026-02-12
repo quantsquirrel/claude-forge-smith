@@ -149,7 +149,7 @@ print_dashboard() {
     recommendations=$(generate_recommendations 2>/dev/null)
 
     echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║                    Skill Forge Monitor                        ║"
+    echo "║                    Forge Monitor                              ║"
     echo "╠══════════════════════════════════════════════════════════════╣"
 
     # Parse and print recommendations

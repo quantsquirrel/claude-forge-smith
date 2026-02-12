@@ -5,7 +5,7 @@
 
 ## Purpose
 
-Main upgrade skill implementing TDD-based evaluation and improvement workflow. Uses trial branches for isolation, 3x independent evaluations for statistical confidence, and CI separation check for validation. This is the core functionality of skill-forge.
+Main upgrade skill implementing TDD-based evaluation and improvement workflow. Uses trial branches for isolation, 3x independent evaluations for statistical confidence, and CI separation check for validation. This is the core functionality of Forge.
 
 ## Key Files
 

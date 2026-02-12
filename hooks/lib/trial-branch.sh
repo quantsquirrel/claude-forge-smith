@@ -5,11 +5,11 @@
 
 set -euo pipefail
 
-TRIAL_PREFIX="skill-forge-trial"
+TRIAL_PREFIX="forge-trial"
 
 # Create a new trial branch
 # Usage: create_trial_branch "skill-name"
-# Returns: Branch name (skill-forge-trial-{skill-name}-{timestamp})
+# Returns: Branch name (forge-trial-{skill-name}-{timestamp})
 create_trial_branch() {
   local skill_name="$1"
 

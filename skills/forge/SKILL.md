@@ -109,8 +109,8 @@ Example: `/forge:forge superpowers:tdd --iterations 3`
 Before using this skill, ensure:
 
 1. **Required files exist**:
-   - `~/.claude/plugins/local/skill-forge/hooks/lib/statistics.sh`
-   - `~/.claude/plugins/local/skill-forge/hooks/lib/trial-branch.sh`
+   - `~/.claude/plugins/local/forge/hooks/lib/statistics.sh`
+   - `~/.claude/plugins/local/forge/hooks/lib/trial-branch.sh`
    - `forge:evaluator` subskill
 
 2. **Git initialized** in target directory (for Trial Branch)

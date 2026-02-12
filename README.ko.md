@@ -2,11 +2,11 @@
 
 <div align="center">
 
-<img src="docs/assets/forge.jpeg" alt="Skill Forge" width="600"/>
+<img src="docs/assets/forge.jpeg" alt="Forge" width="600"/>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=42&duration=3000&pause=1000&color=FFD700&center=true&vCenter=true&width=500&lines=skill-forge">
-  <img alt="skill-forge" src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=42&duration=3000&pause=1000&color=FF6B00&center=true&vCenter=true&width=500&lines=skill-forge">
+  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=42&duration=3000&pause=1000&color=FFD700&center=true&vCenter=true&width=500&lines=forge">
+  <img alt="forge" src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=42&duration=3000&pause=1000&color=FF6B00&center=true&vCenter=true&width=500&lines=forge">
 </picture>
 
 ### ⚔️ 스킬을 전설의 무기로 단조하세요
@@ -57,7 +57,7 @@ graph LR
 ```bash
 # 대장간 설치
 git clone https://github.com/quantsquirrel/claude-forge-smith.git \
-  ~/.claude/plugins/local/skill-forge
+  "$CLAUDE_PLUGIN_ROOT"
 
 # 불꽃 점화
 /forge:forge --scan
@@ -220,7 +220,7 @@ flowchart LR
 **이전:** 71점 — 거칠고 미완성
 **이후:** 90.33점 — 담금질된 전설
 
-**+27% 향상** — skill-forge가 스스로를 재단조했습니다
+**+27% 향상** — Forge가 스스로를 재단조했습니다
 
 궁극의 시험: 자신의 과정을 통해 스스로를 개선하는 도구.
 

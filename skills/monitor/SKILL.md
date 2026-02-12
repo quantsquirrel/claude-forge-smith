@@ -39,7 +39,7 @@ user-invocable: true
 ## Data Sources
 
 ```bash
-source "${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/plugins/local/skill-forge}/hooks/lib/storage-local.sh"
+source "${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/plugins/local/forge}/hooks/lib/storage-local.sh"
 
 # 스킬 유형 판별
 get_skill_type "$skill_name"
@@ -93,7 +93,7 @@ USAGE_TREND=$(get_usage_trend "$skill_name")
 
 ```
 ╔══════════════════════════════════════════════════════════════════════╗
-║                      🔥 Skill Forge Monitor                           ║
+║                      🔥 Forge Monitor                                 ║
 ╠══════════════════════════════════════════════════════════════════════╣
 ║ Quality Analysis (품질 기반 - 사용량과 무관)                          ║
 ╠════════════════════════╤══════════╤═══════╤══════════╤═══════════════╣

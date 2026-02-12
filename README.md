@@ -2,11 +2,11 @@
 
 <div align="center">
 
-<img src="docs/assets/forge.jpeg" alt="Skill Forge" width="600"/>
+<img src="docs/assets/forge.jpeg" alt="Forge" width="600"/>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=42&duration=3000&pause=1000&color=FFD700&center=true&vCenter=true&width=500&lines=skill-forge">
-  <img alt="skill-forge" src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=42&duration=3000&pause=1000&color=FF6B00&center=true&vCenter=true&width=500&lines=skill-forge">
+  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=42&duration=3000&pause=1000&color=FFD700&center=true&vCenter=true&width=500&lines=forge">
+  <img alt="forge" src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=42&duration=3000&pause=1000&color=FF6B00&center=true&vCenter=true&width=500&lines=forge">
 </picture>
 
 ### ⚔️ Forge your skills into legendary weapons
@@ -69,7 +69,7 @@ Before firing up the forge, ensure you have the required tools:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `CLAUDE_PLUGIN_ROOT` | `~/.claude/plugins/local/skill-forge` | Plugin installation path |
+| `CLAUDE_PLUGIN_ROOT` | *(your plugin install directory)* | Plugin installation path |
 | `FORGE_EVALUATOR_CMD` | (built-in) | Custom evaluator script path |
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -79,7 +79,7 @@ Before firing up the forge, ensure you have the required tools:
 ```bash
 # Install the forge
 git clone https://github.com/quantsquirrel/claude-forge-smith.git \
-  ~/.claude/plugins/local/skill-forge
+  "$CLAUDE_PLUGIN_ROOT"
 
 # Ignite the flames
 /forge:forge --scan
@@ -119,7 +119,7 @@ Track your weapons and see which need reforging:
 Output:
 ```
 ╔══════════════════════════════════════════════════════════════════════╗
-║                      🔥 Skill Forge Monitor                           ║
+║                      🔥 Forge Monitor                                  ║
 ╠══════════════════════════════════════════════════════════════════════╣
 ║ Quality Analysis (품질 기반 - 사용량과 무관)                          ║
 ╠════════════════════════╤══════════╤═══════╤══════════╤═══════════════╣
@@ -279,7 +279,7 @@ flowchart LR
 **Before:** 71 points — Raw, unrefined
 **After:** 90.33 points — Tempered, legendary
 
-**+27% improvement** — skill-forge reforged itself
+**+27% improvement** — Forge reforged itself
 
 The ultimate test: A tool that improves itself through its own process.
 
@@ -378,7 +378,7 @@ sudo dnf install jq
 #### `Permission denied` when running commands
 ```bash
 # Make scripts executable
-cd ~/.claude/plugins/local/skill-forge
+cd "$CLAUDE_PLUGIN_ROOT"
 chmod +x hooks/*.sh
 chmod +x bin/*
 ```
@@ -387,7 +387,7 @@ chmod +x bin/*
 1. Check installation path matches `CLAUDE_PLUGIN_ROOT`
 2. Verify `plugin.json` exists in the plugin root
 3. Restart Claude Code CLI
-4. Run `/help` to see if skill-forge commands appear
+4. Run `/help` to see if Forge commands appear
 
 #### Forge evaluations fail silently
 ```bash
@@ -398,7 +398,7 @@ export SKILL_EVAL_DEBUG=true
 ls -la ~/.claude/.skill-evaluator
 
 # Verify evaluator script is executable
-ls -la ~/.claude/plugins/local/skill-forge/bin/skill-evaluator.py
+ls -la "$CLAUDE_PLUGIN_ROOT/bin/skill-evaluator.py"
 ```
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

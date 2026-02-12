@@ -14,7 +14,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 # 테스트용 환경 설정
-export LOCAL_STORAGE_DIR="/tmp/skill-forge-test-$$"
+export LOCAL_STORAGE_DIR="/tmp/forge-test-$$"
 mkdir -p "$LOCAL_STORAGE_DIR/skills"
 
 # 테스트 환경용 debug_log (noop)

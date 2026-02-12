@@ -12,7 +12,7 @@ Automation and utility scripts for project maintenance. Includes PR monitoring a
 | File | Description |
 |------|-------------|
 | `check-pr-status.sh` | Monitors PR status for upstream submissions using `gh` CLI |
-| `com.skillforge.prcheck.plist` | macOS LaunchAgent plist for scheduled PR status checks |
+| `com.forge.prcheck.plist` | macOS LaunchAgent plist for scheduled PR status checks |
 
 ## For AI Agents
 

@@ -5,7 +5,7 @@
 
 ## Purpose
 
-Claude Code hook scripts that integrate skill-forge into the tool lifecycle. Implements lazy detection (only scanning on Write/Edit), session management, and skill usage tracking.
+Claude Code hook scripts that integrate Forge into the tool lifecycle. Implements lazy detection (only scanning on Write/Edit), session management, and skill usage tracking.
 
 ## Key Files
 

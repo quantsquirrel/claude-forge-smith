@@ -5,7 +5,7 @@
 
 ## Purpose
 
-Environment configuration files for the skill-forge plugin. Controls storage mode, paths, and debug settings.
+Environment configuration files for the Forge plugin. Controls storage mode, paths, and debug settings.
 
 ## Key Files
 

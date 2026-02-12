@@ -20,7 +20,7 @@
     "auto-upgrade",
     "claude-plugin",
     "prompt-engineering",
-    "skill-forge"
+    "forge"
   ],
   "skills": "./skills/"
 }

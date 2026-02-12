@@ -5,7 +5,7 @@
 
 ## Purpose
 
-Plugin metadata directory containing the manifest file that registers skill-forge as a Claude Code plugin. Defines plugin identity, version, and skill location.
+Plugin metadata directory containing the manifest file that registers Forge as a Claude Code plugin. Defines plugin identity, version, and skill location.
 
 ## Key Files
 

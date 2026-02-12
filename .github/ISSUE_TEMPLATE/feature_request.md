@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest an idea or enhancement for skill-forge
+about: Suggest an idea or enhancement for Forge
 title: "[FEATURE] "
 labels: enhancement
 ---

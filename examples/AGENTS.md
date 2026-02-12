@@ -5,13 +5,13 @@
 
 ## Purpose
 
-Usage examples and tutorials demonstrating how to use skill-forge features.
+Usage examples and tutorials demonstrating how to use Forge features.
 
 ## Key Files
 
 | File | Description |
 |------|-------------|
-| `basic-usage.md` | Step-by-step guide for basic skill-forge usage |
+| `basic-usage.md` | Step-by-step guide for basic Forge usage |
 
 ## For AI Agents
 

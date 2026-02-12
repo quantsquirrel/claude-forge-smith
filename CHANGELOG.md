@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to skill-forge will be documented in this file.
+All notable changes to Forge (claude-forge-smith) will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
@@ -65,7 +65,7 @@ See [GitHub Issues](https://github.com/quantsquirrel/claude-forge-smith/issues) 
 
 ## Improvement Methodology
 
-Each version improvement follows the skill-forge protocol:
+Each version improvement follows the Forge protocol:
 
 1. **TDD-Fit Check** - Verify skill has tests and is improvable
 2. **Trial Branch** - Create isolated experiment branch

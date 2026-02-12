@@ -30,14 +30,14 @@ fail() {
 }
 
 # Create an isolated temp git repo for each test
-TEST_REPO_BASE="/tmp/skill-forge-trial-test-$$"
+TEST_REPO_BASE="/tmp/forge-trial-test-$$"
 
 setup_test_repo() {
     local repo_dir="$TEST_REPO_BASE/$1"
     mkdir -p "$repo_dir"
     cd "$repo_dir"
     git init --initial-branch=main >/dev/null 2>&1 || git init >/dev/null 2>&1
-    git config user.email "test@skill-forge.test"
+    git config user.email "test@forge.test"
     git config user.name "Test Runner"
     echo "initial content" > README.md
     git add README.md
@@ -81,7 +81,7 @@ test_tb1_create_trial() {
     fi
 
     # Verify branch name follows naming convention
-    if [[ "$branch_name" =~ ^skill-forge-trial-test-skill-alpha-[0-9]+$ ]]; then
+    if [[ "$branch_name" =~ ^forge-trial-test-skill-alpha-[0-9]+$ ]]; then
         pass "Branch name follows convention: $branch_name"
     else
         fail "Branch name doesn't match pattern: $branch_name"
@@ -232,7 +232,7 @@ test_tb4_concurrent_trials() {
 
     # Verify both branches exist
     local branches
-    branches=$(git branch --list "skill-forge-trial*")
+    branches=$(git branch --list "forge-trial*")
 
     local branch1_exists=false
     local branch2_exists=false
