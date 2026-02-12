@@ -13,8 +13,7 @@ Skill definitions directory. Each subdirectory contains a complete skill with SK
 |-----------|---------|
 | `forge/` | Main upgrade skill - TDD evaluation and improvement (see `forge/AGENTS.md`) |
 | `monitor/` | Forge monitor dashboard showing skill quality scores and priorities (see `monitor/AGENTS.md`) |
-| `visualize/` | Skill stats visualization and dashboard (see `visualize/AGENTS.md`) |
-| `writing-skills/` | TDD methodology guide for skill creation (see `writing-skills/AGENTS.md`) |
+| `smelt/` | TDD methodology guide for skill creation - refine raw ideas into polished skills (see `smelt/AGENTS.md`) |
 
 ## For AI Agents
 

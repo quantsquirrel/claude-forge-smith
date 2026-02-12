@@ -310,7 +310,7 @@ No weapon leaves the forge untested. No master version is ever corrupted.
 | `/forge:forge --history` | 📜 View forging chronicles |
 | `/forge:forge --watch` | 👁️ Monitor the forge |
 | `/forge:monitor` | 📊 Quality dashboard |
-| `/forge:visualize` | 🎮 RPG-style skill inventory |
+| `/forge:smelt` | 🔥 Skill creation with TDD methodology |
 
 ### 💡 Argument Hints (v1.0)
 
@@ -319,7 +319,6 @@ When typing a slash command, you'll see available modes:
 ```
 /forge <skill-name> [--precision=high|-n5] - modes: TDD_FIT|HEURISTIC
 /monitor [--priority=HIGH|MED|LOW] [--type=explicit|silent|all]
-/visualize [--month=YYYY-MM] [--format=html|text]
 ```
 
 Add `argument-hint` to your skill's frontmatter to enable this feature.
@@ -419,5 +418,7 @@ ls -la "$CLAUDE_PLUGIN_ROOT/bin/skill-evaluator.py"
 **Inspired by** [skill-up](https://github.com/BumgeunSong/skill-up)
 
 ⚒️ **Forged with Claude Code** · 🔥 **MIT License** · ⚔️ **v1.0**
+
+*This project is not affiliated with or endorsed by Anthropic. Claude and Claude Code are trademarks of Anthropic PBC.*
 
 </div>

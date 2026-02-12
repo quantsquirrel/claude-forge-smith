@@ -270,4 +270,6 @@ flowchart LR
 
 ⚒️ **Claude Code로 단조됨** · 🔥 **MIT License** · ⚔️ **v1.0**
 
+*이 프로젝트는 Anthropic과 제휴하거나 보증받지 않습니다. Claude 및 Claude Code는 Anthropic PBC의 상표입니다.*
+
 </div>

@@ -10,7 +10,7 @@ user-invocable: true
 
 Systematically improve a skill through test-driven evaluation and statistical validation.
 
-**REQUIRED BACKGROUND:** First invoke `forge:writing-skills` skill for TDD methodology applied to skills. See `testing-skills-with-subagents.md` in that skill's directory for pressure scenario templates.
+**REQUIRED BACKGROUND:** First invoke `forge:smelt` skill for TDD methodology applied to skills. See `testing-skills-with-subagents.md` in that skill's directory for pressure scenario templates.
 
 ## Quick Reference
 
@@ -98,7 +98,7 @@ Do NOT use when:
 
 | Argument | Required | Description |
 |----------|----------|-------------|
-| `skill-name` | Yes | The skill to upgrade (e.g., `superpowers:tdd`, `forge:visualize`) |
+| `skill-name` | Yes | The skill to upgrade (e.g., `superpowers:tdd`, `forge:monitor`) |
 | `--iterations N` | No | Maximum upgrade iterations (default: 6) |
 | `--dry-run` | No | Evaluate only, don't apply changes |
 
@@ -115,7 +115,7 @@ Before using this skill, ensure:
 
 2. **Git initialized** in target directory (for Trial Branch)
 
-3. **First-time setup**: Invoke `forge:writing-skills` once to understand TDD methodology
+3. **First-time setup**: Invoke `forge:smelt` once to understand TDD methodology
 
 ## Workflow
 
@@ -342,8 +342,8 @@ else:
 ```
 
 This enables:
-- "강화 완료" badge in `/visualize`
-- SSS/SS grade bonuses (see `skills/visualize/reference.md`)
+- "강화 완료" badge in upgrade history
+- SSS/SS grade bonuses tracked in evaluation stats
 
 ## Output Format
 
@@ -389,7 +389,7 @@ After upgrade, report:
 User: `/forge superpowers:tdd`
 
 1. **Trial Branch 생성**: `forge/superpowers-tdd/20260128-143022`
-2. Invoke `forge:writing-skills` to load TDD methodology
+2. Invoke `forge:smelt` to load TDD methodology
 3. Read the target skill: `~/.claude/skills/superpowers/tdd/SKILL.md`
 4. Create scenario: "You wrote 200 lines, forgot TDD, dinner at 6:30pm..."
 5. **기준선 평가 (3회)**: [65, 70, 68] → 평균 67.7, CI: [61.2, 74.2]

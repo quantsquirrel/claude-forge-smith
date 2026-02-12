@@ -1,7 +1,7 @@
 <!-- Parent: ../AGENTS.md -->
 <!-- Generated: 2026-01-31 | Updated: 2026-01-31 -->
 
-# writing-skills
+# smelt
 
 ## Purpose
 

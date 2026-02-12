@@ -27,7 +27,6 @@ TDD 기반 스킬 자동 업그레이드 플러그인. AI 에이전트 스킬을
 | `scripts/` | Automation and utility scripts (see `scripts/AGENTS.md`) |
 | `skills/` | Skill definitions with SKILL.md files (see `skills/AGENTS.md`) |
 | `tests/` | Test suite with unit, integration, and e2e tests (see `tests/AGENTS.md`) |
-| `visualize/` | HTML templates for skill visualization (see `visualize/AGENTS.md`) |
 
 ## For AI Agents
 

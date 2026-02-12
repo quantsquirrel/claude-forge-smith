@@ -56,6 +56,6 @@ Main upgrade skill implementing TDD-based evaluation and improvement workflow. U
 
 - `../../hooks/lib/statistics.sh` - Statistical calculations
 - `../../hooks/lib/trial-branch.sh` - Git branch management
-- `../writing-skills/` - TDD methodology (required background)
+- `../smelt/` - TDD methodology for skill creation (required background)
 
 <!-- MANUAL: -->
