@@ -1,0 +1,23 @@
+{
+  "name": "claude-forge-smith",
+  "version": "1.0.0",
+  "description": "TDD-based skill auto-upgrade plugin for Claude Code",
+  "author": {
+    "name": "quantsquirrel",
+    "url": "https://github.com/quantsquirrel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quantsquirrel/claude-forge-smith"
+  },
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "claude-code-plugin",
+    "skill",
+    "tdd",
+    "auto-upgrade",
+    "forge"
+  ],
+  "private": true
+}
