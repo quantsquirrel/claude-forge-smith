@@ -1,0 +1,19 @@
+name: Notify Toolkit
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger toolkit sync
+        env:
+          PLUGIN_NAME: "forge"
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.TOOLKIT_DISPATCH_TOKEN }}" \
+            "https://api.github.com/repos/quantsquirrel/thesqrldev-claudecode-toolkit/dispatches" \
+            -d "{\"event_type\":\"plugin-updated\",\"client_payload\":{\"plugin\":\"$PLUGIN_NAME\"}}"
